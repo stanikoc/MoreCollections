@@ -1,4 +1,4 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +13,7 @@ import java.util.Set;
  * The characteristics of this set match those of unmodifiable sets provided
  * by the Java Collections Framework, but act as a unified type hierarchy for
  * specialized internal collections.
- * * @param <E> the type of elements in this set
+ * @param <E> the type of elements in this set
  */
 public interface ImmutableSet<E> extends Set<E>, ImmutableCollection<E> {
     @Override

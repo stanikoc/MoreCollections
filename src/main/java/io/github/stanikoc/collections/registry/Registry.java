@@ -1,4 +1,4 @@
-package me.stani.collections.registry;
+package io.github.stanikoc.collections.registry;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

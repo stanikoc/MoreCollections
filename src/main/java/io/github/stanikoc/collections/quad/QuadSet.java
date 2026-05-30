@@ -1,5 +1,6 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections.quad;
 
+import io.github.stanikoc.collections.ImmutableSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -7,7 +8,7 @@ import java.util.Set;
 /**
  * An immutable {@link Set} consisting of up to 4 elements.
  * <p>
- * <b>Deduplication & Safety:</b><br>
+ * <b>Deduplication &amp; Safety:</b><br>
  * Standard {@link Set#of()} strictly throws an {@link IllegalArgumentException}
  * if duplicate elements are provided. If a developer needs a set of up to 4 unverified elements,
  * they must typically fall back to {@code new HashSet<>()}. This triggers massive
@@ -15,7 +16,7 @@ import java.util.Set;
  * {@code QuadSet} resolves this by performing safe, inline deduplication before construction,
  * ensuring zero array or node allocations.
  * <p>
- * <b>Performance Characteristics & Memory Layout:</b><br>
+ * <b>Performance Characteristics &amp; Memory Layout:</b><br>
  * Even when standard {@link Set#of()} does not fail, it relies on a dedicated field-backed
  * class only for 1 or 2 elements ({@code Set12}). For 3 or 4 elements, it falls back to an
  * array-backed {@code SetN}. {@code SetN} suffers from slower {@code contains()} operations

@@ -1,9 +1,11 @@
 plugins {
-    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
-group = 'me.stani.collections'
-version = '1.0-SNAPSHOT'
+group = 'io.github.stanikoc'
+version = '0.0.1'
 
 repositories {
     mavenCentral()
@@ -18,4 +20,55 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'morecollections'
+            from components.java
+
+            pom {
+                name = 'MoreCollections'
+                description = 'A small library providing specialized, low-overhead collection types for Java.'
+                url = 'https://github.com/stanikoc/MoreCollections'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'stanikoc'
+                        name = 'Stanikoc'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/stanikoc/MoreCollections.git'
+                    developerConnection = 'scm:git:ssh://github.com/stanikoc/MoreCollections.git'
+                    url = 'https://github.com/stanikoc/MoreCollections'
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'CentralPortalRelease'
+            url = rootProject.layout.buildDirectory.dir('central-sync')
+        }
+    }
+}
+
+signing {
+    def isPublishing = gradle.taskGraph.hasTask("publish")
+    required { isPublishing }
+    sign publishing.publications.mavenJava
 }

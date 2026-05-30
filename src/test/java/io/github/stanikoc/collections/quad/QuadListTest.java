@@ -1,8 +1,7 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections.quad;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -37,7 +36,6 @@ class QuadListTest {
     void testIndices() {
         QuadList<String> list = QuadList.of("A", "B", "A", "C");
 
-        // get()
         assertEquals("A", list.get(0));
         assertEquals("B", list.get(1));
         assertEquals("A", list.get(2));
@@ -45,7 +43,6 @@ class QuadListTest {
         assertThrows(IndexOutOfBoundsException.class, () -> list.get(4));
         assertThrows(IndexOutOfBoundsException.class, () -> list.get(-1));
 
-        // indexOf() & lastIndexOf()
         assertEquals(0, list.indexOf("A"));
         assertEquals(2, list.lastIndexOf("A"));
         assertEquals(3, list.indexOf("C"));
@@ -58,12 +55,10 @@ class QuadListTest {
     void testImmutability() {
         QuadList<String> list = QuadList.of("A", "B");
 
-        // Collection mutators
         assertThrows(UnsupportedOperationException.class, () -> list.add("C"));
         assertThrows(UnsupportedOperationException.class, () -> list.remove("A"));
         assertThrows(UnsupportedOperationException.class, list::clear);
 
-        // List specific mutators
         assertThrows(UnsupportedOperationException.class, () -> list.add(1, "Z"));
         assertThrows(UnsupportedOperationException.class, () -> list.set(0, "Z"));
         assertThrows(UnsupportedOperationException.class, () -> list.remove(1));
@@ -76,7 +71,7 @@ class QuadListTest {
 
         List<String> sub1 = list.subList(0, 2);
         assertEquals(List.of("A", "B"), sub1);
-        assertTrue(sub1 instanceof QuadList, "Sublist should return a new QuadList if size > 0");
+        assertInstanceOf(QuadList.class, sub1, "Sublist should return a new QuadList if size > 0");
 
         List<String> sub2 = list.subList(1, 4);
         assertEquals(List.of("B", "C", "D"), sub2);
@@ -123,7 +118,6 @@ class QuadListTest {
         
         assertThrows(NoSuchElementException.class, it::previous);
 
-        // Test iterator immutability
         assertThrows(UnsupportedOperationException.class, it::remove);
         assertThrows(UnsupportedOperationException.class, () -> it.set("Z"));
         assertThrows(UnsupportedOperationException.class, () -> it.add("Z"));

@@ -1,5 +1,6 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections.quad;
 
+import io.github.stanikoc.collections.ImmutableList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * An immutable {@link List} consisting of 1, 2, 3, or 4 elements.
  * <p>
- * <b>Performance Characteristics & Memory Layout:</b><br>
+ * <b>Performance Characteristics &amp; Memory Layout:</b><br>
  * Standard {@link List#of()} implementations utilize dedicated, flat-field
  * classes for 1 or 2 elements ({@code List12}), but immediately degrade to an array-backed
  * wrapper ({@code ListN}) for 3 or more elements.

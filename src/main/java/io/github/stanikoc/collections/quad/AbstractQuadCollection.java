@@ -1,5 +1,6 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections.quad;
 
+import io.github.stanikoc.collections.ImmutableCollection;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Array;

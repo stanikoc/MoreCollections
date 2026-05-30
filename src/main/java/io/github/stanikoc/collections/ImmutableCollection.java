@@ -1,4 +1,4 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections;
 
 import org.jetbrains.annotations.NotNull;
 

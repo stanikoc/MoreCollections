@@ -1,12 +1,11 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections.quad;
 
-import me.stani.collections.registry.HashRegistry;
-import me.stani.collections.registry.Registry;
+import io.github.stanikoc.collections.registry.HashRegistry;
+import io.github.stanikoc.collections.registry.Registry;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 

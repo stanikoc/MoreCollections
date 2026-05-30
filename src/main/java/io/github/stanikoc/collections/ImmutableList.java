@@ -1,4 +1,4 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * ensuring that all index-based mutator methods (such as {@code set},
  * {@code add} at index, and {@code remove} at index) unconditionally throw an
  * {@link UnsupportedOperationException}.
- * * @param <E> the type of elements in this list
+ * @param <E> the type of elements in this list
  */
 public interface ImmutableList<E> extends List<E>, ImmutableCollection<E> {
     @Override

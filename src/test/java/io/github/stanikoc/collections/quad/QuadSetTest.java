@@ -1,4 +1,4 @@
-package me.stani.collections.immutable;
+package io.github.stanikoc.collections.quad;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,16 +26,13 @@ class QuadSetTest {
 
     @Test
     void testDeduplication() {
-        // Size 1 from duplicates
         assertEquals(1, QuadSet.of("A", "A").size());
         assertEquals(1, QuadSet.of("A", "A", "A").size());
         assertEquals(1, QuadSet.of("A", "A", "A", "A").size());
 
-        // Size 2 from duplicates
         assertEquals(2, QuadSet.of("A", "B", "A").size());
         assertEquals(2, QuadSet.of("A", "A", "B", "B").size());
 
-        // Size 3 from duplicates
         QuadSet<String> s3 = QuadSet.of("A", "B", "A", "C");
         assertEquals(3, s3.size());
         assertTrue(s3.containsAll(Set.of("A", "B", "C")));
@@ -49,13 +46,12 @@ class QuadSetTest {
         assertTrue(set.contains(2));
         assertTrue(set.contains(3));
         assertFalse(set.contains(4));
-        assertFalse(set.contains(null)); // Safe to test since contains(Object) lacks @NotNull
+        assertFalse(set.contains(null));
 
         assertTrue(set.containsAll(List.of(1, 2)));
         assertTrue(set.containsAll(List.of(3, 1, 2)));
         assertFalse(set.containsAll(List.of(1, 2, 3, 4)));
 
-        // Fast-path Set rejection test
         assertFalse(set.containsAll(Set.of(1, 2, 3, 4)));
     }
 
@@ -66,7 +62,7 @@ class QuadSetTest {
         assertThrows(UnsupportedOperationException.class, () -> set.add("C"));
         assertThrows(UnsupportedOperationException.class, () -> set.remove("A"));
         assertThrows(UnsupportedOperationException.class, set::clear);
-        assertThrows(UnsupportedOperationException.class, () -> set.addAll(Set.of("C")));
+        assertThrows(UnsupportedOperationException.class, () -> set.addAll(Set.of("C", "B")));
         assertThrows(UnsupportedOperationException.class, () -> set.retainAll(Set.of("A")));
         assertThrows(UnsupportedOperationException.class, () -> set.removeAll(Set.of("B")));
     }
@@ -74,7 +70,7 @@ class QuadSetTest {
     @Test
     void testEqualsAndHashCode() {
         QuadSet<String> quadSet = QuadSet.of("A", "B", "C", "D");
-        Set<String> standardSet = Set.of("D", "B", "C", "A"); // Out of order on purpose
+        Set<String> standardSet = Set.of("D", "B", "C", "A");
 
         assertEquals(standardSet, quadSet, "QuadSet should equal a standard Set with the same elements");
         assertEquals(quadSet, standardSet, "Standard Set should equal a QuadSet with the same elements");
@@ -85,7 +81,6 @@ class QuadSetTest {
     void testIteratorAndToArray() {
         QuadSet<String> set = QuadSet.of("X", "Y");
 
-        // Iterator
         Iterator<String> it = set.iterator();
         assertTrue(it.hasNext());
         assertEquals("X", it.next());
@@ -93,7 +88,6 @@ class QuadSetTest {
         assertEquals("Y", it.next());
         assertFalse(it.hasNext());
 
-        // toArray
         Object[] arr1 = set.toArray();
         assertArrayEquals(new Object[]{"X", "Y"}, arr1);
 

@@ -1,11 +1,11 @@
-package me.stani.collections;
+package io.github.stanikoc.collections.registry;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public final class IteratorUtil {
+final class IteratorUtil {
     @SuppressWarnings("rawtypes")
     private static final Iterator EMPTY_ITERATOR = new Iterator<>() {
         public boolean hasNext() {

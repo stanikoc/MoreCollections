@@ -6,6 +6,20 @@ MoreCollections is a small library providing specialized, low-overhead collectio
 
 ---
 
+## Installation
+Gradle
+```groovy
+implementation 'io.github.stanikoc:morecollections:0.0.1'
+```
+Maven
+```maven
+<dependency>
+    <groupId>io.github.stanikoc</groupId>
+    <artifactId>morecollections</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+
 ## Current Collections
 
 ### QuadSet & QuadList

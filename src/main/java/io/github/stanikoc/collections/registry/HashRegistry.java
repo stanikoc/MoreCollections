@@ -1,7 +1,5 @@
-package me.stani.collections.registry;
+package io.github.stanikoc.collections.registry;
 
-import me.stani.collections.IteratorUtil;
-import me.stani.collections.StaticReferences;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
