@@ -9,14 +9,14 @@ MoreCollections is a small library providing specialized, low-overhead collectio
 ## Installation
 Gradle
 ```groovy
-implementation 'io.github.stanikoc:morecollections:0.0.1'
+implementation 'io.github.stanikoc:morecollections:0.0.2'
 ```
 Maven
 ```maven
 <dependency>
     <groupId>io.github.stanikoc</groupId>
     <artifactId>morecollections</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
