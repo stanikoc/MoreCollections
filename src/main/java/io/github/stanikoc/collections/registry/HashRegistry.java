@@ -97,8 +97,6 @@ public class HashRegistry<K, V> implements Registry<K, V> {
     @SuppressWarnings("unchecked")
     @Override
     public void clear() {
-        Arrays.fill(keys, null);
-        Arrays.fill(values, null);
         keys = (K[]) StaticReferences.emptyObjects();
         values = (V[]) StaticReferences.emptyObjects();
         table = StaticReferences.emptyInts();
