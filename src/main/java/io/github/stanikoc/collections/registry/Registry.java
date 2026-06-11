@@ -41,17 +41,21 @@ public interface Registry<K, V> extends Iterable<V> {
     /**
      * Registers a new key-value pair into the storage.
      * <p>
-     * If the key is already registered, this operation is typically ignored.
-     * @param key   the key to associate with the value
+     * If the key is already registered, the new value is ignored, and the existing
+     * value is returned. If the key is not registered, the new value is stored and
+     * {@code null} is returned.
+     * * @param key   the key to associate with the value
      * @param value the value to be stored
+     * @return the existing value associated with the key, or {@code null} if it was successfully registered
      */
-    void register(@NotNull K key, @NotNull V value);
+    @Nullable V register(@NotNull K key, @NotNull V value);
 
     /**
      * Removes the entry associated with the given key from the registry.
      * @param key the key to unregister
+     * @return the value that was removed, or {@code null} if the key was not registered
      */
-    void unregister(@NotNull K key);
+    @Nullable V unregister(@NotNull K key);
 
     /**
      * Wipes all keys and values from the registry, resetting it to an empty state.

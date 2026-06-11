@@ -43,10 +43,8 @@ class HashRegistryTest {
     @Test
     void testDuplicateRegistrationIgnored() {
         Registry<String, Integer> registry = new HashRegistry<>();
-        registry.register("A", 100);
-
-        registry.register("A", 200);
-
+        assertNull(registry.register("A", 100), "First registration should return null");
+        assertEquals(100, registry.register("A", 200), "Duplicate registration should return the existing value");
         assertEquals(1, registry.size(), "Registry should ignore duplicate key registrations");
         assertEquals(100, registry.get("A"), "Registry should retain the initially registered value");
     }
@@ -59,7 +57,7 @@ class HashRegistryTest {
         registry.register("C", 3);
         registry.register("D", 4);
 
-        registry.unregister("B");
+        assertEquals(2, registry.unregister("B"), "Unregistering should return the removed value");
 
         assertEquals(3, registry.size());
         assertNull(registry.get("B"));
@@ -69,11 +67,11 @@ class HashRegistryTest {
         assertEquals(3, registry.get("C"));
         assertEquals(4, registry.get("D"));
 
-        registry.unregister("C");
+        assertEquals(3, registry.unregister("C"));
         assertEquals(2, registry.size());
         assertNull(registry.get("C"));
 
-        assertDoesNotThrow(() -> registry.unregister("Z"));
+        assertNull(registry.unregister("Z"), "Unregistering a non-existent key should return null");
         assertEquals(2, registry.size());
     }
 

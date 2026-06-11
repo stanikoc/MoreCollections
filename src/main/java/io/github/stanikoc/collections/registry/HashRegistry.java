@@ -54,27 +54,31 @@ public class HashRegistry<K, V> implements Registry<K, V> {
     }
 
     @Override
-    public void register(@NotNull K key, @NotNull V value) {
-        if (indexOf(key) != -1) {
-            return;
+    public V register(@NotNull K key, @NotNull V value) {
+        int existing = indexOf(key);
+        if (existing != -1) {
+            return values[existing];
         }
 
-        int i = values.length;
-        keys = Arrays.copyOf(keys, i + 1);
-        values = Arrays.copyOf(values, i + 1);
-        keys[i] = key;
-        values[i] = value;
+        int last = values.length;
+        keys = Arrays.copyOf(keys, last + 1);
+        values = Arrays.copyOf(values, last + 1);
+        keys[last] = key;
+        values[last] = value;
         if (table.length == 0 || values.length > (table.length >> 1) + (table.length >> 2)) {
             rebuildTable();
         } else {
-            insert(key, i);
+            insert(key, last);
         }
+
+        return null;
     }
 
     @Override
-    public void unregister(@NotNull K key) {
+    public V unregister(@NotNull K key) {
         int i = indexOf(key);
         if (i != -1) {
+            V removedValue = values[i];
             int i0 = values.length - 1;
             if (i != i0) {
                 keys[i] = keys[i0];
@@ -84,7 +88,10 @@ public class HashRegistry<K, V> implements Registry<K, V> {
             keys = Arrays.copyOf(keys, i0);
             values = Arrays.copyOf(values, i0);
             rebuildTable();
+            return removedValue;
         }
+
+        return null;
     }
 
     @SuppressWarnings("unchecked")
